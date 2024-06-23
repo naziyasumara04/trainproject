@@ -18,6 +18,16 @@ const connection =mysql.createConnection({
     password:'123456'
   });
 
+
+  connection.connect((err) => {
+    if (err) {
+        console.error('Error connecting to the database:', err);
+        process.exit(1); // Exit the process with an error code
+    }
+    console.log('Connected to the database');
+});
+
+
 //   let q="insert into train (name,number,source,destination) values (?,?,?,?)";
 
 //   let trval=["name","number","ahmedabad","surat"];
@@ -33,16 +43,16 @@ const connection =mysql.createConnection({
 //     console.log(err);
 // };
 
-connection.end();
+
 
 app.post('/register', (req, res) => {
     console.log(req.body);
     let { name, number,source,destination} = req.body;
     const sql="insert into train (name,number,source,destination) values (?,?,?,?)";
-    let val=[name=name,
-        number=number,
-        source=source,
-        destination=destination];
+    let val=[name,
+        number,
+        source,
+        destination];
     try{
         connection.query(sql,val,(err,result)=>{
           if(err) throw err;
@@ -54,7 +64,7 @@ app.post('/register', (req, res) => {
     res.send("Thanks for registering!!!");
 });
 
-connection.end();
+// connection.end();
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
