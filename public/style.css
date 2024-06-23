@@ -1,0 +1,13 @@
+#container{
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+
+#form{
+    display: none;
+}
+
+/* #register{
+    display: none;
+} */
