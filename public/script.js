@@ -19,3 +19,18 @@ insert.addEventListener("click",function(){
 register.addEventListener("click",function(){
     form.style.display="none";  
 });
+
+document.getElementById('trainInput').addEventListener('click', function() {
+    fetch('/trains')
+        .then(response => response.json())
+        .then(data => {
+            let trainList = document.getElementById('trainList');
+            trainList.style.display = 'block';
+            trainList.innerHTML = data.map(train => `<div onclick="selectTrain('${train}')">${train}</div>`).join('');
+        });
+});
+
+function selectTrain(train) {
+    document.getElementById('trainInput').value = train;
+    document.getElementById('trainList').style.display = 'none';
+}

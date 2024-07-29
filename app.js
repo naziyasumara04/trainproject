@@ -64,6 +64,18 @@ app.post('/register', (req, res) => {
     res.send("Thanks for registering!!!");
 });
 
+app.get('/trains', (req, res) => {
+    const sql = "SELECT number FROM train";
+    connection.query(sql, (err, results) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Error fetching train numbers");
+            return;
+        }
+        res.json(results.map(row => row.number));
+    });
+});
+
 // connection.end();
 
 app.listen(port, () => {
